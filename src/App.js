@@ -2,12 +2,9 @@ import React, { useMemo } from 'react';
 import { ThemeProvider, createTheme } from '@mui/material';
 import { store } from './features/redux/store';
 import { Provider, useSelector } from 'react-redux';
+import Container from './features/components/Container';
 
-const ReduxProvider = ({ children }) => {
-  return <Provider store={store}>{children}</Provider>;
-};
-
-function App() {
+const ProviderWrap = ({ children }) => {
   const mode = useSelector((state) => state.color.colorMode);
   const theme = useMemo(
     () =>
@@ -18,15 +15,18 @@ function App() {
       }),
     [mode]
   );
+  return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
+};
 
+function App() {
   return (
-    <ReduxProvider>
-      <ThemeProvider theme={theme}>
+    <Provider store={store}>
+      <ProviderWrap>
         <div className='App'>
-          
+          <Container />
         </div>
-      </ThemeProvider>
-    </ReduxProvider>
+      </ProviderWrap>
+    </Provider>
   );
 }
 
