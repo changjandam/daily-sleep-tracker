@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, useTheme, Typography, Button } from '@mui/material';
 import { fontSize } from '@mui/system';
+import DataTable from './DataTable';
 
 export default function Container() {
   const theme = useTheme();
@@ -8,7 +9,7 @@ export default function Container() {
   return (
     <Box
       sx={{
-        bgcolor: 'primary.dark',
+        bgcolor: 'primary.main',
         width: '100%',
         height: '100vh',
         display: 'flex',
@@ -56,9 +57,10 @@ export default function Container() {
           sx={{
             flexGrow: '1',
             display: 'flex',
-            justifyContent: 'space-evenly',
           }}
-        ></Box>
+        >
+          <DataTable />
+        </Box>
       </Box>
     </Box>
   );
