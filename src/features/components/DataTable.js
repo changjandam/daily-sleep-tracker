@@ -39,7 +39,9 @@ export default function DataTable() {
   });
 
   const handleDelete = (id) => {
-    return () => dispatch(deleteData({ id }));
+    return () => {
+      setTimeout(() => dispatch(deleteData({ id })));
+    };
   };
 
   const columns = [
