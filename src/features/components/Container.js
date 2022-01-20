@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, useTheme, Typography, Button } from '@mui/material';
-import { fontSize } from '@mui/system';
 import DataTable from './DataTable';
+import DataChart from './DataChart';
 
 export default function Container() {
   const theme = useTheme();
@@ -9,8 +9,8 @@ export default function Container() {
   return (
     <Box
       sx={{
-        bgcolor: 'primary.main',
-        width: '100%',
+        bgcolor: 'rgba(0,0,0,0.3)',
+        width: '100vw',
         height: '100vh',
         display: 'flex',
         justifyContent: 'center',
@@ -22,8 +22,8 @@ export default function Container() {
           bgcolor: 'background.default',
           boxShadow: '10',
           borderRadius: '1rem',
-          width: '85%',
-          height: '85%',
+          maxWidth: '1200px',
+          height: '800px',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
@@ -57,9 +57,13 @@ export default function Container() {
           sx={{
             flexGrow: '1',
             display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-evenly',
+            width: '100%',
           }}
         >
           <DataTable />
+          <DataChart />
         </Box>
       </Box>
     </Box>

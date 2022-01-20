@@ -4,34 +4,12 @@ import { Box, Button } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { deleteData } from '../redux/slices/dataSlice';
+import { getDetail } from '../util/util';
 
 export default function DataTable() {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.data.data);
   const [pageSize, setPageSize] = useState(7);
-
-  const getDetail = ({ start, end }) => {
-    const date = `${new Date(start).getMonth() + 1}/${new Date(
-      start
-    ).getDate()}`;
-    const formatTime = (time) => {
-      const hour = new Date(time).getHours().toString();
-      const minute = new Date(time).getMilliseconds().toString();
-      return `${hour.length === 1 ? '0' + hour : hour}: ${
-        minute.length === 1 ? '0' + minute : minute
-      }`;
-    };
-    const duration = (
-      (new Date(end) - new Date(start)) /
-      (1000 * 3600)
-    ).toPrecision(2);
-    return {
-      date,
-      start: formatTime(start),
-      end: formatTime(end),
-      duration,
-    };
-  };
 
   const rows = data.map((i) => {
     const detail = getDetail(i);
@@ -54,7 +32,6 @@ export default function DataTable() {
       headerName: 'delete',
       width: 80,
       renderCell: (params) => {
-        console.log(params);
         return (
           <Button onClick={handleDelete(params.id)}>
             <DeleteIcon />
@@ -65,9 +42,9 @@ export default function DataTable() {
   ];
 
   return (
-    <Box sx={{ p: '1rem' }}>
+    <Box sx={{ p: '1rem', width: '600px' }}>
       <DataGrid
-        sx={{ width: '600px' }}
+        sx={{}}
         rows={rows}
         columns={columns}
         hideFooterSelectedRowCount

@@ -1,5 +1,9 @@
 import { createSlice, current } from '@reduxjs/toolkit';
 
+const data = new Array(100).map(i=>{
+  
+})
+
 const initialState = {
   data: [
     { id: 1, start: '2022-01-01T00:00', end: '2022-01-01T08:00:00' },
