@@ -1,15 +1,81 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
-import { Box, Button } from '@mui/material';
+import {
+  Box,
+  Button,
+  InputLabel,
+  Select,
+  MenuItem,
+  FormControl,
+} from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { deleteData } from '../redux/slices/dataSlice';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import {
+  deleteData,
+  nextPage,
+  prevPage,
+  setPageSize,
+} from '../redux/slices/dataSlice';
 import { getDetail } from '../util/util';
 
-export default function DataTable() {
+const CustomFooter = ({ isStart, isEnd, pageSize }) => {
   const dispatch = useDispatch();
-  const data = useSelector((state) => state.data.data);
-  const [pageSize, setPageSize] = useState(7);
+  return (
+    <Box
+      sx={{
+        padding: '1rem',
+        display: 'flex',
+        justifyContent: 'space-evenly',
+        width: '100%',
+      }}
+    >
+      <Box>
+        <FormControl>
+          <InputLabel id='page-select-label'>天數</InputLabel>
+          <Select
+            sx={{ width: '100px' }}
+            labelId='page-select-label'
+            id='page-select'
+            value={pageSize}
+            label='天數'
+            onChange={(e) =>
+              dispatch(setPageSize({ pageSize: e.target.value }))
+            }
+          >
+            <MenuItem value={7}>7</MenuItem>
+            <MenuItem value={15}>15</MenuItem>
+            <MenuItem value={30}>30</MenuItem>
+          </Select>
+        </FormControl>
+      </Box>
+      <Button
+        startIcon={<ArrowBackIcon />}
+        disabled={isStart}
+        onClick={() => dispatch(prevPage())}
+      >
+        上一頁
+      </Button>
+      <Button
+        endIcon={<ArrowForwardIcon />}
+        disabled={isEnd}
+        onClick={() => dispatch(nextPage())}
+      >
+        下一頁
+      </Button>
+    </Box>
+  );
+};
+
+export default function DataTable({ data }) {
+  const dispatch = useDispatch();
+  const pageSize = useSelector((state) => state.data.pageSize);
+  const isStart = useSelector((state) => state.data.page === 0);
+  const isEnd = useSelector(
+    (state) =>
+      (state.data.page + 1) * state.data.pageSize > state.data.data.length
+  );
 
   const rows = data.map((i) => {
     const detail = getDetail(i);
@@ -23,7 +89,7 @@ export default function DataTable() {
   };
 
   const columns = [
-    { field: 'date', headerName: 'date', width: 120 },
+    { field: 'id', headerName: 'id', width: 100 },
     { field: 'start', headerName: 'start', width: 120 },
     { field: 'end', headerName: 'end', width: 120 },
     { field: 'duration', headerName: 'duration', width: 120 },
@@ -49,9 +115,12 @@ export default function DataTable() {
         columns={columns}
         hideFooterSelectedRowCount
         pageSize={pageSize}
-        onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
-        rowsPerPageOptions={[7, 15, 30]}
-        pagination
+        components={{
+          Footer: CustomFooter,
+        }}
+        componentsProps={{
+          footer: { isStart, isEnd, pageSize },
+        }}
       />
     </Box>
   );

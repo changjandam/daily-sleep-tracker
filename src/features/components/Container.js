@@ -1,11 +1,22 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Box, useTheme, Typography, Button } from '@mui/material';
 import DataTable from './DataTable';
 import DataChart from './DataChart';
+import { useSelector } from 'react-redux';
 
 export default function Container() {
+  const data = useSelector((state) => state.data);
+
+  const currentPageData = useMemo(() => {
+    return data.data.slice(
+      data.page * data.pageSize,
+      (data.page + 1) * data.pageSize < data.data.length
+        ? (data.page + 1) * data.pageSize
+        : data.data.length
+    );
+  }, [data]);
+
   const theme = useTheme();
-  console.log(theme);
   return (
     <Box
       sx={{
@@ -62,8 +73,8 @@ export default function Container() {
             width: '100%',
           }}
         >
-          <DataTable />
-          <DataChart />
+          <DataTable data={currentPageData} />
+          <DataChart data={currentPageData} />
         </Box>
       </Box>
     </Box>

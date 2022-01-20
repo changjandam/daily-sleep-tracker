@@ -1,20 +1,24 @@
 import React from 'react';
-import { BarChart, CartesianGrid, XAxis, YAxis, Bar, Tooltip, Legend } from 'recharts';
-import { useSelector } from 'react-redux';
+import {
+  BarChart,
+  CartesianGrid,
+  XAxis,
+  YAxis,
+  Bar,
+  Tooltip,
+  Legend,
+} from 'recharts';
 import { getDetail } from '../util/util';
 import { Box } from '@mui/material';
 import { useTheme } from '@mui/material';
 
-export default function DataChart() {
-  const theme = useTheme()
-  const data = useSelector((state) => state.data.data);
+export default function DataChart({ data }) {
+  const theme = useTheme();
 
   const chartData = data.map((i) => {
     const detail = getDetail(i);
     return { date: detail.date, duration: parseFloat(detail.duration) };
   });
-
-  console.log(chartData);
 
   return (
     <Box
