@@ -8,9 +8,10 @@ import {
   Tooltip,
   Legend,
 } from 'recharts';
+
+import { Box, useTheme } from '@mui/material';
+
 import { getDetail } from '../util/util';
-import { Box } from '@mui/material';
-import { useTheme } from '@mui/material';
 
 export default function DataChart({ data }) {
   const theme = useTheme();

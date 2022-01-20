@@ -1,4 +1,12 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  deleteData,
+  nextPage,
+  prevPage,
+  setPageSize,
+} from '../redux/slices/dataSlice';
+
 import { DataGrid } from '@mui/x-data-grid';
 import {
   Box,
@@ -8,16 +16,10 @@ import {
   MenuItem,
   FormControl,
 } from '@mui/material';
-import { useSelector, useDispatch } from 'react-redux';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import {
-  deleteData,
-  nextPage,
-  prevPage,
-  setPageSize,
-} from '../redux/slices/dataSlice';
+
 import { getDetail } from '../util/util';
 
 const CustomFooter = ({ isStart, isEnd, pageSize }) => {
