@@ -70,16 +70,14 @@ const CustomFooter = ({ isStart, isEnd, pageSize }) => {
   );
 };
 
-export default function DataTable({ data }) {
+export default function DataTable({ currentData }) {
   const dispatch = useDispatch();
-  const pageSize = useSelector((state) => state.data.pageSize);
-  const isStart = useSelector((state) => state.data.page === 0);
-  const isEnd = useSelector(
-    (state) =>
-      (state.data.page + 1) * state.data.pageSize > state.data.data.length
-  );
+  const rawData = useSelector((state) => state.data);
+  const pageSize = rawData.pageSize;
+  const isStart = rawData.page === 0;
+  const isEnd = (rawData.page + 1) * rawData.pageSize > rawData.data.length;
 
-  const rows = data.map((i) => {
+  const rows = currentData.map((i) => {
     const detail = getDetail(i);
     return { id: i.id, ...detail };
   });

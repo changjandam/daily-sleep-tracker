@@ -5,6 +5,7 @@ import { change } from '../redux/slices/colorSlice';
 
 import DataTable from './DataTable';
 import DataChart from './DataChart';
+import InputModal from './InputModal'
 
 import { Box, Typography, Button } from '@mui/material';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
@@ -68,19 +69,7 @@ export default function Container() {
             <Brightness4Icon fontSize='large' />
           )}
         </Button>
-        <Button
-          variant='contained'
-          size='large'
-          color='primary'
-          sx={{
-            width: '10rem',
-            height: '3rem',
-            my: '1rem',
-            borderRadius: '999px',
-          }}
-        >
-          + New Entry
-        </Button>
+        <InputModal />
         <Box
           sx={{
             flexGrow: '1',
@@ -90,8 +79,8 @@ export default function Container() {
             width: '100%',
           }}
         >
-          <DataTable data={currentPageData} />
-          <DataChart data={currentPageData} />
+          <DataTable currentData={currentPageData} />
+          <DataChart currentData={currentPageData} />
         </Box>
       </Box>
     </Box>

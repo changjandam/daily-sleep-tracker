@@ -13,10 +13,10 @@ import { Box, useTheme } from '@mui/material';
 
 import { getDetail } from '../util/util';
 
-export default function DataChart({ data }) {
+export default function DataChart({ currentData }) {
   const theme = useTheme();
 
-  const chartData = data.map((i) => {
+  const chartData = currentData.map((i) => {
     const detail = getDetail(i);
     return { date: detail.date, duration: parseFloat(detail.duration) };
   });
