@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/static/css/main.e6c13ad2.css",
-    "main.js": "/static/js/main.b687933f.js",
-    "index.html": "/index.html",
-    "main.e6c13ad2.css.map": "/static/css/main.e6c13ad2.css.map",
-    "main.b687933f.js.map": "/static/js/main.b687933f.js.map"
+    "main.css": "/daily-sleep-tracker/static/css/main.e6c13ad2.css",
+    "main.js": "/daily-sleep-tracker/static/js/main.f7a03934.js",
+    "index.html": "/daily-sleep-tracker/index.html",
+    "main.e6c13ad2.css.map": "/daily-sleep-tracker/static/css/main.e6c13ad2.css.map",
+    "main.f7a03934.js.map": "/daily-sleep-tracker/static/js/main.f7a03934.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.b687933f.js"
+    "static/js/main.f7a03934.js"
   ]
 }
