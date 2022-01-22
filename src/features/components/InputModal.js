@@ -1,18 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import { addData, nextPage } from '../redux/slices/dataSlice';
+import { addData } from '../redux/slices/dataSlice';
 import { Box, Button, TextField } from '@mui/material';
 import { LocalizationProvider, DateTimePicker } from '@mui/lab';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import { useDispatch } from 'react-redux';
 
 export default function DatePickerModal() {
-  const now = new Date();
-  const [start, setStart] = useState(now);
-  const [end, setEnd] = useState(now);
+  const [start, setStart] = useState();
+  const [end, setEnd] = useState();
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    const now = new Date();
+    setStart(now);
+    setEnd(now);
+  }, [setStart, setEnd]);
+
   const handleAdd = () => {
-    console.log('hadleAdd');
     dispatch(
       addData({
         start: start.toISOString(),
@@ -50,13 +54,14 @@ export default function DatePickerModal() {
           minDateTime={start}
           onChange={(newEnd) => setEnd(newEnd)}
           renderInput={(params) => <TextField {...params} />}
+          openTo='hours'
         />
       </LocalizationProvider>
       <Button
         variant='contained'
         sx={{ height: '100%' }}
         onClick={handleAdd}
-        // disabled={start === end}
+        disabled={start === end}
       >
         + new Entry
       </Button>

@@ -89,7 +89,7 @@ export default function DataTable({ currentData }) {
   };
 
   const columns = [
-    { field: 'id', headerName: 'id', width: 100 },
+    { field: 'date', headerName: 'date', width: 100 },
     { field: 'start', headerName: 'start', width: 120 },
     { field: 'end', headerName: 'end', width: 120 },
     { field: 'duration', headerName: 'duration', width: 120 },

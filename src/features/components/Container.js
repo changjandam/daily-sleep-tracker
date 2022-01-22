@@ -14,7 +14,6 @@ import Brightness7Icon from '@mui/icons-material/Brightness7';
 export default function Container() {
   const data = useSelector((state) => state.data);
   const mode = useSelector((state) => state.color.colorMode);
-  console.log(data)
   const dispatch = useDispatch();
   const currentPageData = useMemo(() => {
     return data.data.slice(
