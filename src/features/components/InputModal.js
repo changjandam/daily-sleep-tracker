@@ -5,12 +5,14 @@ import { LocalizationProvider, DateTimePicker } from '@mui/lab';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import { useDispatch } from 'react-redux';
 
-export default function DatePickerModal({lastPage}) {
-  const [start, setStart] = useState(new Date());
-  const [end, setEnd] = useState(new Date());
+export default function DatePickerModal() {
+  const now = new Date();
+  const [start, setStart] = useState(now);
+  const [end, setEnd] = useState(now);
   const dispatch = useDispatch();
 
   const handleAdd = () => {
+    console.log('hadleAdd');
     dispatch(
       addData({
         start: start.toISOString(),
@@ -20,10 +22,8 @@ export default function DatePickerModal({lastPage}) {
     const now = new Date();
     setStart(now);
     setEnd(now);
-
   };
 
-  console.log(start);
   return (
     <Box
       sx={{
@@ -52,7 +52,12 @@ export default function DatePickerModal({lastPage}) {
           renderInput={(params) => <TextField {...params} />}
         />
       </LocalizationProvider>
-      <Button variant='contained' sx={{ height: '100%' }} onClick={handleAdd}>
+      <Button
+        variant='contained'
+        sx={{ height: '100%' }}
+        onClick={handleAdd}
+        // disabled={start === end}
+      >
         + new Entry
       </Button>
     </Box>

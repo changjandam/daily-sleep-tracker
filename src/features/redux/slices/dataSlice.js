@@ -26,6 +26,7 @@ const dataSlice = createSlice({
   initialState,
   reducers: {
     addData: (state, { payload }) => {
+      console.log('addData');
       state.data = [
         ...current(state).data,
         {
@@ -34,16 +35,22 @@ const dataSlice = createSlice({
           end: payload.end,
         },
       ];
+      state.page = Math.floor((state.data.length - 1) / state.pageSize);
     },
     deleteData: (state, { payload }) => {
       state.data = state.data.filter((data) => data.id !== payload.id);
-      if ((state.page) * state.pageSize >= state.data.length) {
+      if (state.page * state.pageSize >= state.data.length) {
         state.page -= 1;
       }
     },
-    nextPage: (state) => {
+    nextPage: (state, { payload }) => {
+      console.log('nextPage');
       if (state.data.length > (state.page + 1) * state.pageSize) {
-        state.page += 1;
+        if (payload === undefined) {
+          state.page += 1;
+        } else {
+          state.page = payload.page;
+        }
       }
     },
     prevPage: (state) => {
