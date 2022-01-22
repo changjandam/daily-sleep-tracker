@@ -5,7 +5,7 @@ import { change } from '../redux/slices/colorSlice';
 
 import DataTable from './DataTable';
 import DataChart from './DataChart';
-import InputModal from './InputModal'
+import InputModal from './InputModal';
 
 import { Box, Typography, Button } from '@mui/material';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
@@ -14,6 +14,8 @@ import Brightness7Icon from '@mui/icons-material/Brightness7';
 export default function Container() {
   const data = useSelector((state) => state.data);
   const mode = useSelector((state) => state.color.colorMode);
+  const lastPage = Math.ceil(data.data.length / (data.pageSize));
+  console.log(lastPage);
   const dispatch = useDispatch();
   const currentPageData = useMemo(() => {
     return data.data.slice(
@@ -69,7 +71,7 @@ export default function Container() {
             <Brightness4Icon fontSize='large' />
           )}
         </Button>
-        <InputModal />
+        <InputModal lastPage={lastPage} />
         <Box
           sx={{
             flexGrow: '1',

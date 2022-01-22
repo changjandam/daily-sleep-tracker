@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { addData } from '../redux/slices/dataSlice';
+import { addData, nextPage } from '../redux/slices/dataSlice';
 import { Box, Button, TextField } from '@mui/material';
 import { LocalizationProvider, DateTimePicker } from '@mui/lab';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import { useDispatch } from 'react-redux';
 
-export default function DatePickerModal() {
+export default function DatePickerModal({lastPage}) {
   const [start, setStart] = useState(new Date());
   const [end, setEnd] = useState(new Date());
   const dispatch = useDispatch();
@@ -20,6 +20,7 @@ export default function DatePickerModal() {
     const now = new Date();
     setStart(now);
     setEnd(now);
+
   };
 
   console.log(start);

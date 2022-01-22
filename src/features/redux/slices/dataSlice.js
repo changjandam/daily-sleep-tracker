@@ -37,6 +37,9 @@ const dataSlice = createSlice({
     },
     deleteData: (state, { payload }) => {
       state.data = state.data.filter((data) => data.id !== payload.id);
+      if ((state.page) * state.pageSize >= state.data.length) {
+        state.page -= 1;
+      }
     },
     nextPage: (state) => {
       if (state.data.length > (state.page + 1) * state.pageSize) {

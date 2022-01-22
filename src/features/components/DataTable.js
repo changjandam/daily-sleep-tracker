@@ -75,7 +75,7 @@ export default function DataTable({ currentData }) {
   const rawData = useSelector((state) => state.data);
   const pageSize = rawData.pageSize;
   const isStart = rawData.page === 0;
-  const isEnd = (rawData.page + 1) * rawData.pageSize > rawData.data.length;
+  const isEnd = (rawData.page + 1) * rawData.pageSize >= rawData.data.length;
 
   const rows = currentData.map((i) => {
     const detail = getDetail(i);
